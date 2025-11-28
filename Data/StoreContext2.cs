@@ -19,8 +19,8 @@ namespace API.Data
             // Configure relationships
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.Items)
-                .WithOne()
-                .HasForeignKey("OrderId");
+                .WithOne(i => i.Order)
+                .HasForeignKey(i => i.OrderId);
         }
     }
 }
