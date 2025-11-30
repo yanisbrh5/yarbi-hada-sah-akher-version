@@ -84,10 +84,10 @@ namespace API
 
             app.MapControllers();
 
-            // Health check endpoints for UptimeRobot
-            app.MapGet("/", () => "API is running!");
-            app.MapGet("/health", () => Results.Ok("Healthy"));
-            app.MapGet("/api", () => "API Root");
+            // Health check endpoints for UptimeRobot - Allow GET, HEAD, POST to avoid 405 errors
+            app.MapMethods("/", new[] { "GET", "HEAD", "POST" }, () => "API is running!");
+            app.MapMethods("/health", new[] { "GET", "HEAD", "POST" }, () => Results.Ok("Healthy"));
+            app.MapMethods("/api", new[] { "GET", "HEAD", "POST" }, () => "API Root");
 
             // Database Seeding
             using (var scope = app.Services.CreateScope())
