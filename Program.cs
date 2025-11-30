@@ -84,6 +84,11 @@ namespace API
 
             app.MapControllers();
 
+            // Health check endpoints for UptimeRobot
+            app.MapGet("/", () => "API is running!");
+            app.MapGet("/health", () => Results.Ok("Healthy"));
+            app.MapGet("/api", () => "API Root");
+
             // Database Seeding
             using (var scope = app.Services.CreateScope())
             {
